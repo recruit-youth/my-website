@@ -1,1 +1,4 @@
+User-agent: *
+Allow: /
 
+Sitemap: https://my-website-kappa-beryl-40.vercel.app/sitemap.xml
