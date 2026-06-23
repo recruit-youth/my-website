@@ -1,0 +1,1597 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>トップエージェント株式会社｜採用サイト</title>
+  <meta name="description" content="トップエージェント株式会社の採用サイト。保険・レンタカー・自動車販売の3事業を展開。あなたの挑戦を、ここから始めよう。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* =====================
+       RESET & ROOT
+    ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange:   #e84c1e;
+      --orange-2: #f26b3a;
+      --orange-3: #ff8c5a;
+      --dark:     #111111;
+      --gray-bg:  #f4f4f2;
+      --gray-mid: #888888;
+      --line:     #e0e0dc;
+      --white:    #ffffff;
+      --ease:     cubic-bezier(.22, 1, .36, 1);
+      --sans-jp:  "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      --sans-en:  "Inter", "Helvetica Neue", Arial, sans-serif;
+    }
+    html { scroll-behavior: smooth; background: var(--gray-bg); }
+    body {
+      font-family: var(--sans-jp);
+      color: var(--dark);
+      background: var(--gray-bg);
+      overflow-x: hidden;
+      line-height: 1.8;
+    }
+    body.is-menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* =====================
+       HEADER
+    ===================== */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 18px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background .4s var(--ease), box-shadow .4s var(--ease);
+    }
+    .site-header.scrolled {
+      background: rgba(244,244,242,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 2px 24px rgba(0,0,0,.08);
+    }
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-logo-img {
+      height: 64px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+    .footer-logo-img {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+    .logo-text {
+      font-family: var(--sans-en);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--dark);
+      line-height: 1.3;
+    }
+    .logo-text small {
+      display: block;
+      font-size: 9px;
+      font-weight: 400;
+      color: var(--gray-mid);
+      letter-spacing: .08em;
+    }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .header-nav a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      color: var(--dark);
+      opacity: .7;
+      transition: opacity .25s;
+    }
+    .header-nav a:hover { opacity: 1; }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .btn-entry {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: var(--dark);
+      color: #fff;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      transition: background .25s;
+      isolation: isolate;
+    }
+    .btn-entry:hover { background: var(--orange); }
+    .btn-entry .arrow {
+      font-size: 16px;
+      transition: transform .25s var(--ease);
+    }
+    .btn-entry:hover .arrow { transform: translateX(4px); }
+    .btn-menu {
+      width: 46px;
+      height: 46px;
+      border: none;
+      background: var(--dark);
+      border-radius: 100px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: background .25s;
+    }
+    .btn-menu:hover { background: #333; }
+    .btn-menu span {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform .4s var(--ease), opacity .3s;
+    }
+    body.is-menu-open .btn-menu span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    body.is-menu-open .btn-menu span:nth-child(2) { opacity: 0; }
+    body.is-menu-open .btn-menu span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* =====================
+       MOBILE MENU
+    ===================== */
+    .mobile-menu {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--dark);
+      z-index: 999;
+      display: block;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-100%);
+      transition: transform .55s var(--ease), visibility .55s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+    body.is-menu-open .mobile-menu {
+      transform: translateY(0);
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .mobile-menu nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .mobile-menu nav a {
+      font-size: clamp(24px, 5vw, 40px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: .04em;
+      opacity: .6;
+      transition: opacity .2s;
+    }
+    .mobile-menu nav a:hover { opacity: 1; }
+    .mobile-menu .menu-entry {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 40px;
+      background: var(--orange);
+      color: #fff;
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      transition: background .25s;
+    }
+    .mobile-menu .menu-entry:hover { background: var(--orange-2); }
+
+    /* =====================
+       HERO
+    ===================== */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      min-height: 600px;
+      background: var(--gray-bg);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    /* 左側 写真（斜めクリップ） */
+    .hero-photo {
+      position: absolute;
+      top: 0; left: 0;
+      width: 56%;
+      height: 100%;
+      clip-path: polygon(0 0, 75% 0, 100% 100%, 0 100%);
+      z-index: 1;
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* オレンジの大きな波形シェイプ */
+    .hero-shape {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .hero-shape svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* テキストコンテンツ */
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      padding: 0 6vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--sans-en);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      color: var(--gray-mid);
+    }
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--gray-mid);
+    }
+    .hero-title {
+      font-size: clamp(48px, 7.5vw, 96px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -.01em;
+      color: var(--dark);
+    }
+    .hero-title .line {
+      display: block;
+      overflow: hidden;
+    }
+    .hero-title .line span {
+      display: block;
+      transform: translateY(110%);
+      transition: transform .9s var(--ease);
+    }
+    .hero.is-visible .hero-title .line:nth-child(1) span { transform: translateY(0); transition-delay: .1s; }
+    .hero.is-visible .hero-title .line:nth-child(2) span { transform: translateY(0); transition-delay: .22s; }
+    .hero.is-visible .hero-title .line:nth-child(3) span { transform: translateY(0); transition-delay: .34s; }
+
+    .hero-sub {
+      font-family: var(--sans-en);
+      font-size: clamp(12px, 1.4vw, 16px);
+      font-weight: 500;
+      letter-spacing: .16em;
+      color: var(--gray-mid);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .8s var(--ease) .7s, transform .8s var(--ease) .7s;
+    }
+    .hero.is-visible .hero-sub {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      right: 48px;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--sans-en);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      color: var(--gray-mid);
+    }
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--gray-mid), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* =====================
+       SECTION COMMON
+    ===================== */
+    section { padding: 100px 0; }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans-en);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .25em;
+      color: var(--orange);
+      margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--orange);
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -.01em;
+    }
+    .section-lead {
+      margin-top: 20px;
+      font-size: 15px;
+      color: var(--gray-mid);
+      line-height: 1.85;
+      max-width: 560px;
+    }
+
+    /* reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .8s var(--ease), transform .8s var(--ease);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =====================
+       NUMBERS
+    ===================== */
+    .numbers {
+      background: var(--dark);
+      padding: 80px 0;
+    }
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .numbers-item {
+      padding: 40px 32px;
+      border-right: 1px solid rgba(255,255,255,.1);
+      text-align: center;
+      position: relative;
+    }
+    .numbers-item:last-child { border-right: none; }
+    .numbers-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 2px;
+      background: var(--orange);
+      transition: width .4s var(--ease);
+    }
+    .numbers-item:hover::after { width: 64px; }
+    .numbers-value {
+      font-family: var(--sans-en);
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+    .numbers-value span {
+      font-size: .55em;
+      color: var(--orange);
+      vertical-align: super;
+      margin-left: 2px;
+    }
+    .numbers-label {
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,.5);
+      letter-spacing: .08em;
+    }
+
+    /* =====================
+       MESSAGE
+    ===================== */
+    .message {
+      background: var(--gray-bg);
+      overflow: hidden;
+    }
+    .message-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .message-body {}
+    .message-title {
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -.01em;
+    }
+    .message-title em {
+      font-style: normal;
+      color: var(--orange);
+    }
+    .message-text {
+      margin-top: 28px;
+      font-size: 15px;
+      line-height: 1.95;
+      color: #444;
+    }
+    .message-text + .message-text { margin-top: 16px; }
+    .message-visual {
+      position: relative;
+    }
+    .message-img-wrap {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .message-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s var(--ease);
+    }
+    .message-img-wrap:hover img { transform: scale(1.04); }
+    .message-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      width: 120px;
+      height: 120px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: var(--sans-en);
+      font-weight: 900;
+      text-align: center;
+      line-height: 1.1;
+      box-shadow: 0 8px 32px rgba(232,76,30,.4);
+    }
+    .message-badge .num {
+      font-size: 30px;
+      letter-spacing: -.02em;
+    }
+    .message-badge .unit {
+      font-size: 11px;
+      opacity: .85;
+    }
+
+    /* =====================
+       BUSINESS
+    ===================== */
+    .business { background: #fff; }
+    .business-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 60px;
+    }
+    .biz-card {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: var(--dark);
+      cursor: pointer;
+    }
+    /* 実画像レイヤー */
+    .biz-card-img {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      transition: transform .6s var(--ease);
+    }
+    .biz-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      background: #1a1a2e;
+    }
+    .biz-card:hover .biz-card-img { transform: scale(1.06); }
+    /* 暗めのオーバーレイ */
+    .biz-card-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.35) 55%, rgba(0,0,0,.15) 100%);
+      transition: background .4s;
+    }
+    .biz-card:hover .biz-card-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.4) 55%, rgba(0,0,0,.2) 100%);
+    }
+    .biz-card-body {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%;
+      padding: 32px;
+      z-index: 3;
+    }
+    .biz-card-num {
+      font-family: var(--sans-en);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+    .biz-card-name {
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .biz-card-desc {
+      margin-top: 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,.75);
+      line-height: 1.7;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: opacity .4s var(--ease), transform .4s var(--ease);
+    }
+    .biz-card:hover .biz-card-desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =====================
+       FEATURE
+    ===================== */
+    .feature { background: var(--gray-bg); }
+    .feature-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 60px;
+    }
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .feature-item {
+      padding: 36px 0;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .feature-item:first-child { border-top: 1px solid var(--line); }
+    .feature-num {
+      font-family: var(--sans-en);
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 48px;
+    }
+    .feature-text {}
+    .feature-item-title {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .feature-item-desc {
+      margin-top: 8px;
+      font-size: 14px;
+      color: var(--gray-mid);
+      line-height: 1.8;
+    }
+    .feature-visual {
+      position: sticky;
+      top: 100px;
+    }
+    .feature-visual-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      position: relative;
+    }
+    .feature-visual-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .feature-visual-badge {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: var(--orange);
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.4;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(232,76,30,.35);
+    }
+
+    /* =====================
+       PROCESS
+    ===================== */
+    .process { background: #fff; }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 60px;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(10% + 20px);
+      right: calc(10% + 20px);
+      height: 2px;
+      background: linear-gradient(to right, var(--orange), var(--orange-3));
+    }
+    .process-step {
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+    }
+    .process-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 8px 24px rgba(232,76,30,.3);
+      font-family: var(--sans-en);
+      font-size: 20px;
+      font-weight: 900;
+      color: #fff;
+    }
+    .process-step-title {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .process-step-desc {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--gray-mid);
+      line-height: 1.7;
+    }
+
+    /* =====================
+       LOCATIONS（採用拠点）
+    ===================== */
+    .voice { background: var(--gray-bg); }
+    .locations-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 60px;
+    }
+    .location-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 28px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.06);
+      border: 1.5px solid transparent;
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
+    }
+    .location-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 36px rgba(0,0,0,.11);
+      border-color: var(--orange);
+    }
+    .location-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .location-body {}
+    .location-pref {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--orange);
+      letter-spacing: .1em;
+      margin-bottom: 2px;
+    }
+    .location-city {
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -.01em;
+    }
+    .location-addr {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--gray-mid);
+      line-height: 1.6;
+    }
+
+    /* =====================
+       COMPANY
+    ===================== */
+    .company { background: #fff; }
+    .company-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-top: 60px;
+    }
+    .company-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .company-table tr {
+      border-bottom: 1px solid var(--line);
+    }
+    .company-table th {
+      padding: 18px 20px 18px 0;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-mid);
+      letter-spacing: .06em;
+      white-space: nowrap;
+      vertical-align: top;
+      width: 36%;
+    }
+    .company-table td {
+      padding: 18px 0;
+      font-size: 14px;
+      color: var(--dark);
+      line-height: 1.75;
+    }
+    .company-img {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .company-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform .6s var(--ease);
+    }
+    .company-img:hover img { transform: scale(1.04); }
+
+    /* =====================
+       RECRUIT CTA
+    ===================== */
+    .recruit-cta {
+      background: var(--dark);
+      padding: 120px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .recruit-cta::before {
+      content: 'JOIN US';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--sans-en);
+      font-size: clamp(80px, 15vw, 180px);
+      font-weight: 900;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255,255,255,.06);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: .1em;
+    }
+    .recruit-cta .section-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .cta-label {
+      font-family: var(--sans-en);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .25em;
+      color: var(--orange);
+      margin-bottom: 24px;
+    }
+    .cta-title {
+      font-size: clamp(32px, 5vw, 64px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      letter-spacing: -.01em;
+    }
+    .cta-sub {
+      margin-top: 20px;
+      font-size: 15px;
+      color: rgba(255,255,255,.55);
+      line-height: 1.8;
+    }
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .btn-cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 44px;
+      background: var(--orange);
+      color: #fff;
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      transition: background .25s, transform .25s var(--ease), box-shadow .25s;
+      box-shadow: 0 8px 32px rgba(232,76,30,.4);
+      isolation: isolate;
+    }
+    .btn-cta-primary:hover {
+      background: var(--orange-2);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(232,76,30,.5);
+    }
+    .btn-cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 40px;
+      border: 1.5px solid rgba(255,255,255,.3);
+      color: #fff;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      transition: border-color .25s, background .25s;
+    }
+    .btn-cta-secondary:hover {
+      border-color: #fff;
+      background: rgba(255,255,255,.08);
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    .site-footer {
+      background: #0a0a0a;
+      padding: 60px 0 40px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .footer-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 60px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .footer-brand {}
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .footer-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,.4);
+      line-height: 1.8;
+      max-width: 280px;
+    }
+    .footer-nav-group {
+      display: flex;
+      gap: 60px;
+    }
+    .footer-nav-col {}
+    .footer-nav-title {
+      font-family: var(--sans-en);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      color: rgba(255,255,255,.3);
+      margin-bottom: 16px;
+    }
+    .footer-nav-col a {
+      display: block;
+      font-size: 13px;
+      color: rgba(255,255,255,.6);
+      line-height: 2;
+      transition: color .2s;
+    }
+    .footer-nav-col a:hover { color: #fff; }
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,.25);
+      letter-spacing: .06em;
+    }
+    .footer-policy a {
+      font-size: 12px;
+      color: rgba(255,255,255,.35);
+      transition: color .2s;
+    }
+    .footer-policy a:hover { color: rgba(255,255,255,.7); }
+
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 1024px) {
+      .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+      .numbers-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); }
+      .numbers-item:nth-child(2n) { border-right: none; }
+      .process-steps { grid-template-columns: repeat(3, 1fr); gap: 40px; }
+      .process-steps::before { display: none; }
+    }
+
+    @media (max-width: 900px) {
+      .header-nav { display: none; }
+      .hero-photo { width: 100%; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      .hero-photo::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(244,244,242,.55);
+      }
+      .hero-shape { display: none; }
+      .hero-content { padding: 0 28px; }
+      .message-inner { grid-template-columns: 1fr; gap: 40px; }
+      .message-visual { order: -1; }
+      .business-grid { grid-template-columns: 1fr; }
+      .biz-card { aspect-ratio: 16/9; }
+      .feature-layout { grid-template-columns: 1fr; }
+      .feature-visual { position: static; order: -1; }
+      .feature-visual-wrap { aspect-ratio: 16/9; }
+      .locations-grid { grid-template-columns: repeat(2, 1fr); }
+      .company-layout { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; gap: 40px; }
+    }
+
+    @media (max-width: 640px) {
+      section { padding: 72px 0; }
+      .section-inner { padding: 0 20px; }
+      .hero-title { font-size: clamp(36px, 10vw, 60px); }
+      .numbers-grid { grid-template-columns: 1fr 1fr; }
+      .numbers-item { padding: 28px 16px; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .locations-grid { grid-template-columns: 1fr; }
+      .cta-actions { flex-direction: column; }
+      .btn-cta-primary, .btn-cta-secondary { width: 100%; justify-content: center; }
+      .footer-nav-group { flex-direction: column; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .btn-entry { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================
+       HEADER
+  ======================== -->
+  <header class="site-header" id="site-header">
+    <a href="#" class="header-logo" aria-label="トップエージェント株式会社 トップページ">
+      <img src="https://www.genspark.ai/api/files/s/SvMiFgtB" alt="Top Agent ロゴ" class="header-logo-img" />
+    </a>
+
+    <nav class="header-nav" aria-label="メインナビゲーション">
+      <a href="#message">私たちについて</a>
+      <a href="#business">事業内容</a>
+      <a href="#feature">選ばれる理由</a>
+      <a href="#voice">社員の声</a>
+      <a href="#company">会社概要</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#recruit-cta" class="btn-entry">
+        ENTRYはこちら
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <button class="btn-menu" id="btn-menu" aria-label="メニューを開く" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- モバイルメニュー -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="ナビゲーションメニュー">
+    <nav>
+      <a href="#message"  class="menu-link">私たちについて</a>
+      <a href="#business" class="menu-link">事業内容</a>
+      <a href="#feature"  class="menu-link">選ばれる理由</a>
+      <a href="#voice"    class="menu-link">社員の声</a>
+      <a href="#company"  class="menu-link">会社概要</a>
+      <a href="#recruit-cta" class="menu-entry">ENTRY →</a>
+    </nav>
+  </div>
+
+  <!-- ========================
+       HERO
+  ======================== -->
+  <section class="hero" id="hero" aria-label="ヒーロービジュアル">
+
+    <!-- 背景写真（斜めクリップ） -->
+    <div class="hero-photo">
+      <img
+        src="https://www.genspark.ai/api/files/s/QAyfiLbj"
+        alt="ネイビースーツを着た笑顔のビジネス女性"
+        loading="eager"
+      />
+    </div>
+
+    <!-- オレンジ波形シェイプ -->
+    <div class="hero-shape" aria-hidden="true">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="shapeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#e84c1e" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#f26b3a" stop-opacity=".85"/>
+          </linearGradient>
+        </defs>
+        <!-- 大きな波形シェイプ（右中央を波打つ） -->
+        <path
+          d="M860,0 C820,0 760,60 700,160 C640,260 620,360 560,440 C500,520 420,570 380,660 C340,750 360,840 340,900 L1440,900 L1440,0 Z"
+          fill="url(#shapeGrad)"
+          opacity="0.92"
+        />
+        <!-- 小さな補助シェイプ -->
+        <path
+          d="M980,0 C940,40 900,120 870,200 C840,280 840,360 820,440 C800,520 780,610 800,700 C820,790 860,860 900,900 L1440,900 L1440,0 Z"
+          fill="#f26b3a"
+          opacity="0.35"
+        />
+      </svg>
+    </div>
+
+    <!-- テキストコンテンツ -->
+    <div class="hero-content">
+      <p class="hero-tag">RECRUITING SITE 2025</p>
+      <h1 class="hero-title">
+        <span class="line"><span>挑戦する人を、</span></span>
+        <span class="line"><span>支える仕事が</span></span>
+        <span class="line"><span>ある。</span></span>
+      </h1>
+      <p class="hero-sub">Your challenge starts here. / トップエージェント株式会社</p>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">SCROLL</div>
+  </section>
+
+  <!-- ========================
+       NUMBERS
+  ======================== -->
+  <section class="numbers" aria-label="実績数値">
+    <div class="section-inner">
+      <div class="numbers-grid">
+        <div class="numbers-item reveal">
+          <div class="numbers-value">1,200<span>+</span></div>
+          <div class="numbers-label">累計契約件数</div>
+        </div>
+        <div class="numbers-item reveal" style="transition-delay:.1s">
+          <div class="numbers-value">98<span>%</span></div>
+          <div class="numbers-label">顧客満足度</div>
+        </div>
+        <div class="numbers-item reveal" style="transition-delay:.2s">
+          <div class="numbers-value">15<span>年</span></div>
+          <div class="numbers-label">業界経験年数</div>
+        </div>
+        <div class="numbers-item reveal" style="transition-delay:.3s">
+          <div class="numbers-value">3<span>拠点</span></div>
+          <div class="numbers-label">全国展開中</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       MESSAGE
+  ======================== -->
+  <section class="message" id="message" aria-labelledby="message-heading">
+    <div class="message-inner">
+      <div class="message-body reveal">
+        <p class="section-label">OUR MESSAGE</p>
+        <h2 class="message-title" id="message-heading">
+          あなたの<em>成長</em>が、<br>
+          お客様の<em>未来</em>をつくる。
+        </h2>
+        <p class="message-text">
+          トップエージェント株式会社は、保険・レンタカー・自動車販売の3事業を通じて、
+          人々のライフステージに寄り添うサービスを提供しています。
+        </p>
+        <p class="message-text">
+          私たちが求めるのは、「お客様のために考え抜ける人」。
+          業界経験不問。熱意とやる抜く力があれば、
+          ここで確かなキャリアを築くことができます。
+        </p>
+      </div>
+      <div class="message-visual reveal" style="transition-delay:.15s">
+        <div class="message-img-wrap">
+          <img
+            src="https://www.genspark.ai/api/files/s/l26Yq1bK"
+            alt="都市のビジネス街・高層ビル群"
+            loading="lazy"
+          />
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       BUSINESS
+  ======================== -->
+  <section class="business" id="business" aria-labelledby="business-heading">
+    <div class="section-inner">
+      <p class="section-label reveal">BUSINESS</p>
+      <h2 class="section-title reveal" id="business-heading">私たちの3つの事業</h2>
+      <p class="section-lead reveal">多彩なフィールドで、お客様の「安心」と「便利」を提供します。</p>
+    </div>
+    <div class="business-grid">
+      <article class="biz-card reveal">
+        <div class="biz-card-img">
+          <img src="https://www.genspark.ai/api/files/s/w7gALZzM" alt="保険事業イメージ" loading="lazy" />
+        </div>
+        <div class="biz-card-overlay"></div>
+        <div class="biz-card-body">
+          <p class="biz-card-num">BUSINESS 01</p>
+          <h3 class="biz-card-name">保険事業</h3>
+          <p class="biz-card-desc">生命保険・損害保険のコンサルティング営業。お客様一人ひとりのライフプランに最適な保障プランをご提案します。</p>
+        </div>
+      </article>
+      <article class="biz-card reveal" style="transition-delay:.1s">
+        <div class="biz-card-img">
+          <img src="https://www.genspark.ai/api/files/s/iDjKIpca" alt="書類・手続き事業イメージ" loading="lazy" />
+        </div>
+        <div class="biz-card-overlay"></div>
+        <div class="biz-card-body">
+          <p class="biz-card-num">BUSINESS 02</p>
+          <h3 class="biz-card-name">データ入力/<br>書類作成代行事業</h3>
+          <p class="biz-card-desc">正確・迅速なデータ入力から各種書類作成まで、業務効率化をトータルでサポートします。</p>
+        </div>
+      </article>
+      <article class="biz-card reveal" style="transition-delay:.2s">
+        <div class="biz-card-img">
+          <img src="https://www.genspark.ai/api/files/s/tiBxRUyG" alt="自動車販売事業イメージ" loading="lazy" />
+        </div>
+        <div class="biz-card-overlay"></div>
+        <div class="biz-card-body">
+          <p class="biz-card-num">BUSINESS 03</p>
+          <h3 class="biz-card-name">自動車販売事業</h3>
+          <p class="biz-card-desc">新車・中古車の販売からアフターサービスまで。お客様のカーライフをトータルでサポートします。</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========================
+       FEATURE
+  ======================== -->
+  <section class="feature" id="feature" aria-labelledby="feature-heading">
+    <div class="section-inner">
+      <p class="section-label reveal">WHY TOP AGENT</p>
+      <h2 class="section-title reveal" id="feature-heading">選ばれる3つの理由</h2>
+
+      <div class="feature-layout">
+        <div class="feature-list">
+          <article class="feature-item reveal">
+            <div class="feature-num" aria-hidden="true">01</div>
+            <div class="feature-text">
+              <h3 class="feature-item-title">未経験者でも安心の研修制度</h3>
+              <p class="feature-item-desc">入社後3ヶ月の充実した研修プログラム。先輩社員によるOJTで、業界知識とスキルをゼロから習得できます。資格取得支援制度も完備。</p>
+            </div>
+          </article>
+          <article class="feature-item reveal" style="transition-delay:.1s">
+            <div class="feature-num" aria-hidden="true">02</div>
+            <div class="feature-text">
+              <h3 class="feature-item-title">実力主義の評価・報酬体系</h3>
+              <p class="feature-item-desc">年齢・性別・経験年数に関係なく、成果を正当に評価します。トップ営業は入社2年目で年収600万円超を実現。インセンティブ制度も充実。</p>
+            </div>
+          </article>
+          <article class="feature-item reveal" style="transition-delay:.2s">
+            <div class="feature-num" aria-hidden="true">03</div>
+            <div class="feature-text">
+              <h3 class="feature-item-title">多様なキャリアパスが選べる</h3>
+              <p class="feature-item-desc">営業スペシャリスト・マネジメント・専門職など複数のキャリアトラックを用意。自分の強みと志向に合わせた成長ルートを選択できます。</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="feature-visual reveal" style="transition-delay:.15s">
+          <div class="feature-visual-wrap">
+            <img
+              src="https://www.genspark.ai/api/files/s/l26Yq1bK"
+              alt="都市のビジネス街・高層ビル群"
+              loading="lazy"
+            />
+            <div class="feature-visual-badge">
+              未経験者<br>歓迎
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       PROCESS
+  ======================== -->
+  <section class="process" id="process" aria-labelledby="process-heading">
+    <div class="section-inner">
+      <p class="section-label reveal">HOW TO JOIN</p>
+      <h2 class="section-title reveal" id="process-heading">入社までの流れ</h2>
+      <p class="section-lead reveal">エントリーから内定まで、最短2週間。選考はシンプルで明快です。</p>
+
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="process-circle" aria-hidden="true">1</div>
+          <h3 class="process-step-title">エントリー</h3>
+          <p class="process-step-desc">このページ下部のフォームから簡単エントリー</p>
+        </div>
+        <div class="process-step reveal" style="transition-delay:.08s">
+          <div class="process-circle" aria-hidden="true">2</div>
+          <h3 class="process-step-title">書類選考</h3>
+          <p class="process-step-desc">提出書類を確認後、3営業日以内にご連絡</p>
+        </div>
+        <div class="process-step reveal" style="transition-delay:.16s">
+          <div class="process-circle" aria-hidden="true">3</div>
+          <h3 class="process-step-title">一次面接</h3>
+          <p class="process-step-desc">人事担当者との対話形式の面接（オンライン可）</p>
+        </div>
+        <div class="process-step reveal" style="transition-delay:.24s">
+          <div class="process-circle" aria-hidden="true">4</div>
+          <h3 class="process-step-title">最終面接</h3>
+          <p class="process-step-desc">役員との面接。あなたの志と可能性をお聞かせください</p>
+        </div>
+        <div class="process-step reveal" style="transition-delay:.32s">
+          <div class="process-circle" aria-hidden="true">5</div>
+          <h3 class="process-step-title">内定・入社</h3>
+          <p class="process-step-desc">内定後は入社準備をサポート。安心してスタートできます</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       VOICE
+  ======================== -->
+  <section class="voice" id="voice" aria-labelledby="voice-heading">
+    <div class="section-inner">
+      <p class="section-label reveal">LOCATIONS</p>
+      <h2 class="section-title reveal" id="voice-heading">採用拠点</h2>
+      <p class="section-lead reveal">全国7拠点でメンバーを募集しています。あなたの地域でキャリアをスタートしよう。</p>
+
+      <div class="locations-grid">
+        <div class="location-card reveal">
+          <div class="location-icon" aria-hidden="true">📍</div>
+          <div class="location-body">
+            <p class="location-pref">宮城県</p>
+            <p class="location-city">仙台</p>
+            <p class="location-addr">青葉区本町２丁目３−１０</p>
+          </div>
+        </div>
+        <div class="location-card reveal" style="transition-delay:.06s">
+          <div class="location-icon" aria-hidden="true">📍</div>
+          <div class="location-body">
+            <p class="location-pref">福島県</p>
+            <p class="location-city">郡山</p>
+            <p class="location-addr">虎丸町２１−１０</p>
+          </div>
+        </div>
+        <div class="location-card reveal" style="transition-delay:.12s">
+          <div class="location-icon" aria-hidden="true">📍</div>
+          <div class="location-body">
+            <p class="location-pref">東京都</p>
+            <p class="location-city">渋谷</p>
+            <p class="location-addr">渋谷区渋谷１丁目２−５</p>
+          </div>
+        </div>
+        <div class="location-card reveal" style="transition-delay:.18s">
+          <div class="location-icon" aria-hidden="true">📍</div>
+          <div class="location-body">
+            <p class="location-pref">神奈川県</p>
+            <p class="location-city">横浜</p>
+            <p class="location-addr">西区北幸１丁目１１−１５</p>
+          </div>
+        </div>
+        <div class="location-card reveal" style="transition-delay:.24s">
+          <div class="location-icon" aria-hidden="true">📍</div>
+          <div class="location-body">
+            <p class="location-pref">大阪府</p>
+            <p class="location-city">大阪</p>
+            <p class="location-addr">北区茶屋町１２−６</p>
+          </div>
+        </div>
+        <div class="location-card reveal" style="transition-delay:.30s">
+          <div class="location-icon" aria-hidden="true">📍</div>
+          <div class="location-body">
+            <p class="location-pref">愛知県</p>
+            <p class="location-city">名古屋</p>
+            <p class="location-addr">中区栄４丁目１６−８</p>
+          </div>
+        </div>
+        <div class="location-card reveal" style="transition-delay:.36s">
+          <div class="location-icon" aria-hidden="true">📍</div>
+          <div class="location-body">
+            <p class="location-pref">兵庫県</p>
+            <p class="location-city">神戸</p>
+            <p class="location-addr">中央区京町７４</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       COMPANY
+  ======================== -->
+  <section class="company" id="company" aria-labelledby="company-heading">
+    <div class="section-inner">
+      <p class="section-label reveal">COMPANY</p>
+      <h2 class="section-title reveal" id="company-heading">会社概要</h2>
+
+      <div class="company-layout">
+        <div class="reveal">
+          <table class="company-table" aria-label="会社概要テーブル">
+            <tbody>
+              <tr>
+                <th scope="row">会社名</th>
+                <td>トップエージェント株式会社</td>
+              </tr>
+              <tr>
+                <th scope="row">代表</th>
+                <td>高橋 将汰</td>
+              </tr>
+              <tr>
+                <th scope="row">従業員数</th>
+                <td>32名（業務委託を含む）</td>
+              </tr>
+              <tr>
+                <th scope="row">事業内容</th>
+                <td>保険事業 / データ入力・書類作成代行 / 自動車販売事業</td>
+              </tr>
+              <tr>
+                <th scope="row">住所</th>
+                <td>群馬県藤岡市中987-1<br>フジビルヂング201</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="company-img reveal" style="transition-delay:.15s">
+          <img src="https://www.genspark.ai/api/files/s/IH5LjuLt" alt="トップエージェント オフィス内観" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       RECRUIT CTA
+  ======================== -->
+  <section class="recruit-cta" id="recruit-cta" aria-labelledby="cta-heading">
+    <div class="section-inner">
+      <p class="cta-label reveal">JOIN OUR TEAM</p>
+      <h2 class="cta-title reveal" id="cta-heading">
+        あなたの挑戦を、<br>ここから始めよう。
+      </h2>
+      <p class="cta-sub reveal">
+        業界・職種未経験歓迎。新卒・中途採用、随時受付中。<br>
+        まずはお気軽にエントリーください。
+      </p>
+      <div class="cta-actions reveal">
+        <a href="#" class="btn-cta-primary" aria-label="今すぐエントリーする">
+          今すぐエントリー →
+        </a>
+        <a href="#company" class="btn-cta-secondary" aria-label="会社概要を見る">
+          会社概要を見る
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       FOOTER
+  ======================== -->
+  <footer class="site-footer" aria-label="サイトフッター">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="https://www.genspark.ai/api/files/s/SvMiFgtB" alt="Top Agent ロゴ" class="footer-logo-img" />
+          </div>
+          <p class="footer-desc">保険・レンタカー・自動車販売の3事業を通じて、人々のライフステージに寄り添うサービスを提供しています。</p>
+        </div>
+
+        <nav class="footer-nav-group" aria-label="フッターナビゲーション">
+          <div class="footer-nav-col">
+            <p class="footer-nav-title">MENU</p>
+            <a href="#message">私たちについて</a>
+            <a href="#business">事業内容</a>
+            <a href="#feature">選ばれる理由</a>
+            <a href="#voice">社員の声</a>
+            <a href="#company">会社概要</a>
+          </div>
+          <div class="footer-nav-col">
+            <p class="footer-nav-title">RECRUIT</p>
+            <a href="#recruit-cta">新卒採用</a>
+            <a href="#recruit-cta">中途採用</a>
+            <a href="#process">選考フロー</a>
+            <a href="#voice">社員インタビュー</a>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Top Agent Co., Ltd. All rights reserved.</p>
+        <div class="footer-policy">
+          <a href="#">プライバシーポリシー</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================
+       JAVASCRIPT
+  ======================== -->
+  <script>
+    /* ---------- ヘッダースクロール ---------- */
+    const header = document.getElementById('site-header');
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          header.classList.toggle('scrolled', window.scrollY > 40);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    /* ---------- ヒーロー表示アニメーション ---------- */
+    document.querySelector('.hero').classList.add('is-visible');
+
+    /* ---------- モバイルメニュー ---------- */
+    const btnMenu   = document.getElementById('btn-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    btnMenu.addEventListener('click', () => {
+      const isOpen = document.body.classList.toggle('is-menu-open');
+      btnMenu.setAttribute('aria-expanded', isOpen);
+    });
+
+    document.querySelectorAll('.mobile-menu .menu-link, .mobile-menu .menu-entry').forEach(link => {
+      link.addEventListener('click', () => {
+        document.body.classList.remove('is-menu-open');
+        btnMenu.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ---------- スクロールリビール ---------- */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ---------- カウントアップ ---------- */
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const valEl = entry.target.querySelector('.numbers-value');
+        if (!valEl) return;
+        const text  = valEl.textContent;
+        const match = text.match(/[\d,]+/);
+        if (!match) return;
+        const target  = parseInt(match[0].replace(/,/g, ''), 10);
+        const suffix  = valEl.innerHTML.replace(/[\d,]+/, '').trim();
+        let current = 0;
+        const step  = Math.ceil(target / 60);
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          valEl.innerHTML = current.toLocaleString() + suffix;
+          if (current >= target) clearInterval(timer);
+        }, 20);
+        countObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.numbers-item').forEach(el => countObserver.observe(el));
+  </script>
+</body>
+</html>
